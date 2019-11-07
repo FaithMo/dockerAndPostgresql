@@ -16,5 +16,5 @@ services:
     image: adminer
     restart: always
     ports:
-      - 9990:8080
+      - 9090:8080
 

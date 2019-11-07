@@ -1,4 +1,6 @@
+------------Creating database------------
 CREATE DATABASE Umuzi;
+--------creating and inserting data----------
 CREATE TABLE Customers(
    CustomerID     serial PRIMARY KEY,
    FirstName      VARCHAR (50),
@@ -94,56 +96,57 @@ VALUES (2, 'Classic Car', 'Turnable front wheels, steering function', 550.75);
 INSERT INTO Products(ProductID, ProductName, Description, BuyPrice)
 VALUES (3, 'Sports Car', 'Turnable front wheels, steering function', 700.60);
 
+---------1-------------
 SELECT * FROM Customers;
-
+---------2-------------
 SELECT DISTINCT FirstName, LastName, Gender, Address, Phone, Email FROM Customers;
-
+---------3-------------
 SELECT
   FirstName,
   LastName
 FROM Customers 
 WHERE CustomerID = 1;
-
+---------4------------
 UPDATE Customers
 SET FirstName = 'Lebitso',
     LastName = 'Mabitso'
 WHERE
    CustomerID = 1;
-
+---------5-------------
 DELETE FROM Customers
 WHERE CustomerID = 2;
-
+---------6-------------
 SELECT COUNT(DISTINCT Status) 
 FROM Orders;
-
+---------7--------------
 SELECT MAX(Amount)
 FROM Payments;
-
+--------8---------------
 SELECT * FROM Customers
 ORDER BY Country;
-
+---------9--------------
 SELECT * FROM Products
 WHERE BuyPrice BETWEEN 100 AND 600;
-
+----------10--------------
 SELECT * FROM Customers
 WHERE Country = 'Germany' AND City = 'Berlin';
-
+-----------11-------------
 SELECT * FROM Customers
 WHERE City = 'Cape Town' OR City = 'Durban';
-
+-----------12-------------
 SELECT * FROM Products
 WHERE BuyPrice > 500;
-
+----------13--------------
 SELECT SUM (Amount)
 FROM Payments;
-
+-----------14-------------
 SELECT COUNT(DISTINCT Status) 
 FROM Orders
 WHERE Status = 'Shipped';
-
+-----------15-------------
 SELECT AVG(BuyPrice) AS AveragePriceRands FROM Products;
 SELECT AVG(BuyPrice/12) AS AveragePriceDollars FROM Products;
-
+-----------16-------------
 SELECT
    Customers.CustomerID,
    FirstName,
@@ -156,6 +159,6 @@ SELECT
    City
 FROM Customers
 INNER JOIN Payments ON Payments.CustomerID = Customers.CustomerID;
-
+----------17--------------
 SELECT * FROM Products
 WHERE Description = 'Turnable front wheels, steering function';
