@@ -1,5 +1,4 @@
-//PART1-----------------POSTGRESQL--------------------
-
+CREATE DATABASE Umuzi;
 CREATE TABLE Customers(
    CustomerID     serial PRIMARY KEY,
    FirstName      VARCHAR (50),
@@ -26,8 +25,6 @@ VALUES(4, 'Charl', 'Muller', 'Male', '290A DOrset Ecke', ++44856872553, 'Charl.m
 
 INSERT INTO customers(CustomerID, FirstName, LastName, Gender, Address, Phone, Email, City, Country)
 VALUES(5, 'Julia', 'Stein', 'Female', '2 Wernerring', ++448672445058, 'Js234@yahoo.com', 'Frankfurt', 'Germany');
-   
-//----------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Employees (
    EmployeeID   SERIAL        PRIMARY KEY,
@@ -45,8 +42,22 @@ VALUES(2, 'Lesly', 'Cronje', 'LesC@gmail.com', 'Clerk');
 
 INSERT INTO Employees(EmployeeID, FirstName, LasttName, Email, JobTitle)
 VALUES(3, 'Gideon', 'Maduku', 'm@gmail.com', 'Accountant');
-   
-//---------------------------------------------------------------------------------------------------------
+
+CREATE TABLE Payments(
+   CustomerID     int references Customers(CustomerID),
+   PaymentID      SERIAL     PRIMARY KEY,
+   PaymentDate    int        NOT NULL,
+   Amount         NUMERIC    NOT NULL
+);
+
+INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
+VALUES (1, 1, 2018-09-01, 150.75);
+
+INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
+VALUES (5, 2, 2018-09-02, 150.75);
+
+INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
+VALUES (4, 3, 2018-09-03, 700.60);
 
 CREATE TABLE Orders(
    OrdersID                SERIAL        PRIMARY KEY,
@@ -67,32 +78,12 @@ VALUES (2, 1, 2, 2, '2018-09-04', '2018-09-03', 'Shipped');
 INSERT INTO Orders(OrdersID, ProductID, PaymentID, FulfilledByEmployeeID,DateRequired, DateShipped, Status)
 VALUES (3, 3, 3, 3, '2018-09-06', null, 'Not shipped');
 
-//---------------------------------------------------------------------------------------------------------
-CREATE TABLE Payments(
-   CustomerID     int references Customers(CustomerID),
-   PaymentID      SERIAL     PRIMARY KEY,
-   PaymentDate    int        NOT NULL,
-   Amount         NUMERIC    NOT NULL
-);
-
-INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
-VALUES (1, 1, 2018-09-01, 150.75);
-
-INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
-VALUES (5, 2, 2018-09-02, 150.75);
-
-INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
-VALUES (4, 3, 2018-09-03, 700.60);
-
-//----------------------------------------------------------------------------------------------------------
-
 CREATE TABLE Products(
    ProductID    SERIAL        PRIMARY KEY,
    ProductName  varchar(100)  NOT NULL,
    Description  varchar(100)  NOT NULL,
    BuyPrice     NUMERIC       NOT NULL
 );
-
 
 INSERT INTO Products(ProductID, ProductName, Description, BuyPrice)
 VALUES (1, 'Harley Davidson Chopper', 'This replica features working kickstand, front suspension, gear-shift lever', 150.75);
@@ -103,88 +94,56 @@ VALUES (2, 'Classic Car', 'Turnable front wheels, steering function', 550.75);
 INSERT INTO Products(ProductID, ProductName, Description, BuyPrice)
 VALUES (3, 'Sports Car', 'Turnable front wheels, steering function', 700.60);
 
-//----------------------------------------------------------------------------------------------------------
-
-//PART 2 POSTGRESQL
-//--------1-----------
 SELECT * FROM Customers;
- //---------2---------
-SELECT DISTINCT FirstName, LastName, Gender, Address, Phone, Email
-FROM Customers;
 
-//---------3----------
+SELECT DISTINCT FirstName, LastName, Gender, Address, Phone, Email FROM Customers;
+
 SELECT
   FirstName,
   LastName
-FROM 
-  Customers 
-WHERE 
-  CustomerID = 1;
-//---------4---------
+FROM Customers 
+WHERE CustomerID = 1;
+
 UPDATE Customers
 SET FirstName = 'Lebitso',
     LastName = 'Mabitso'
 WHERE
    CustomerID = 1;
 
-//---------5---------
 DELETE FROM Customers
 WHERE CustomerID = 2;
-//---------6---------
-SELECT 
-   COUNT(DISTINCT Status) 
-FROM 
-   Orders;
-//---------7---------
+
+SELECT COUNT(DISTINCT Status) 
+FROM Orders;
+
 SELECT MAX(Amount)
 FROM Payments;
-//---------8---------
+
 SELECT * FROM Customers
 ORDER BY Country;
-//---------9---------
-SELECT * FROM
-   Products
-WHERE
-    BuyPrice BETWEEN 100 AND 600;
- //---------10---------
- SELECT 
- *
-FROM
-  Customers
-WHERE
- Country = 'Germany' AND City = 'Berlin';
- //---------11---------
- SELECT 
- *
-FROM
-  Customers
-WHERE
-  City = 'Cape Town' OR City = 'Durban';
- //---------12---------
- SELECT 
- *
-FROM
-  Products
-WHERE
-  BuyPrice > 500;
- //---------13---------
- SELECT
- SUM (Amount)
-FROM
- Payments;
- //---------14---------
- SELECT 
- COUNT(DISTINCT Status) 
-FROM 
- Orders
-WHERE
- Status = 'Shipped';
-//---------15---------
+
+SELECT * FROM Products
+WHERE BuyPrice BETWEEN 100 AND 600;
+
+SELECT * FROM Customers
+WHERE Country = 'Germany' AND City = 'Berlin';
+
+SELECT * FROM Customers
+WHERE City = 'Cape Town' OR City = 'Durban';
+
+SELECT * FROM Products
+WHERE BuyPrice > 500;
+
+SELECT SUM (Amount)
+FROM Payments;
+
+SELECT COUNT(DISTINCT Status) 
+FROM Orders
+WHERE Status = 'Shipped';
 
 SELECT AVG(BuyPrice) AS AveragePriceRands FROM Products;
 SELECT AVG(BuyPrice/12) AS AveragePriceDollars FROM Products;
 
-//---------16---------
 SELECT
    Customers.CustomerID,
    FirstName,
@@ -195,10 +154,8 @@ SELECT
    Email,
    Country,
    City
-FROM
-   Customers
+FROM Customers
 INNER JOIN Payments ON Payments.CustomerID = Customers.CustomerID;
 
-//---------17---------
 SELECT * FROM Products
 WHERE Description = 'Turnable front wheels, steering function';
