@@ -36,7 +36,7 @@ The database contains the following tables:
 
     🔸The Orders table is the final table storing all data recorded on Customers, Employees, 
     
-    Payments and Products. for a specific customer. It links all tables for a particular order.
+        Payments and Products. for a specific customer. It links all tables for a particular order.
     
     🔸ProductID references the ProductID from the Products table.
     
