@@ -14,8 +14,8 @@ CREATE TABLE Customers(
 );
 
 --inserting data into Customers table
-INSERT INTO Customers(CustomerID, FirstName, LastName, Gender, Address, Phone, Email, City, Country)
-VALUES(1, 'John', 'Hilbert', 'Male', '284 chaucer st', 084789657, 'john@gmail.com', 'Johannesburg', 'South Africa');
+INSERT INTO Customers(FirstName, LastName, Gender, Address, Phone, Email, City, Country)
+VALUES('John', 'Hilbert', 'Male', '284 chaucer st', 084789657, 'john@gmail.com', 'Johannesburg', 'South Africa');
 
 INSERT INTO customers(FirstName, LastName, Gender, Address, Phone, Email, City, Country)
 VALUES('Thando', 'Sithole', 'Female', '240 Sect 1', 0794445584, 'thando@gmail.com', 'Cape Town', 'South Africa');
@@ -31,7 +31,7 @@ VALUES('Julia', 'Stein', 'Female', '2 Wernerring', ++448672445058, 'Js234@yahoo.
 
 --Creating table Employees
 CREATE TABLE Employees (
-   EmployeeID   SERIAL    PRIMARY KEY,
+   EmployeeID   SERIAL        PRIMARY KEY,
    FirstName    VARCHAR(50)   NOT NULL,
    LasttName    VARCHAR(50)   NOT NULL,
    Email        VARCHAR(100)  NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE Employees (
 );
 
 --Inserting data into Employees table
-INSERT INTO Employees(EmployeeID, FirstName, LasttName, Email, JobTitle)
-VALUES(1, 'Kani', 'Matthew', 'mat@gmail.com', 'Manager');
+INSERT INTO Employees(FirstName, LasttName, Email, JobTitle)
+VALUES('Kani', 'Matthew', 'mat@gmail.com', 'Manager');
 
 INSERT INTO Employees(FirstName, LasttName, Email, JobTitle)
 VALUES('Lesly', 'Cronje', 'LesC@gmail.com', 'Clerk');
@@ -54,14 +54,14 @@ VALUES('Gideon', 'Maduku', 'm@gmail.com', 'Accountant');
 
 --Creating Payments table
 CREATE TABLE Payments(
-   CustomerID     int references Customers(CustomerID),
+   CustomerID     int        references Customers(CustomerID),
    PaymentID      SERIAL     PRIMARY KEY,
    PaymentDate    int        NOT NULL,
    Amount         NUMERIC    NOT NULL
 );
 
 --Inserting data into Payments table
-INSERT INTO Payments(CustomerID, PaymentID, PaymentDate, Amount)
+INSERT INTO Payments(CustomerID, PaymentDate, Amount)
 VALUES (1, 2018-09-01, 150.75);
 
 INSERT INTO Payments(CustomerID, PaymentDate, Amount)
@@ -79,8 +79,8 @@ CREATE TABLE Products(
 );
 
 --Inserting data into Products
-INSERT INTO Products(ProductID, ProductName, Description, BuyPrice)
-VALUES (1, 'Harley Davidson Chopper', 'This replica features working kickstand, front suspension, gear-shift lever', 150.75);
+INSERT INTO Products(ProductName, Description, BuyPrice)
+VALUES ('Harley Davidson Chopper', 'This replica features working kickstand, front suspension, gear-shift lever', 150.75);
 
 INSERT INTO Products(ProductName, Description, BuyPrice)
 VALUES ('Classic Car', 'Turnable front wheels, steering function', 550.75);
@@ -92,15 +92,15 @@ CREATE TABLE Orders(
    OrdersID                SERIAL       PRIMARY KEY,
    ProductID               int,         references Payments(ProductID),
    PaymentID               int          references Payments(PaymentID),
-   FulfilledByEmployeeID   int,
+   FulfilledByEmployeeID   int          references Employees(EmployeeID),
    DateRequired            DATE,
    DateShipped             DATE,
    Status                  varchar(20)
 );
 
 --Inserting data into Orders
-INSERT INTO Orders(OrdersID, ProductID, PaymentID, FulfilledByEmployeeID,DateRequired, DateShipped, Status)
-VALUES (1, 1, 1, 2, '05-09-2018', null, 'Not shipped');
+INSERT INTO Orders(ProductID, PaymentID, FulfilledByEmployeeID,DateRequired, DateShipped, Status)
+VALUES (1, 1, 2, '05-09-2018', null, 'Not shipped');
 
 INSERT INTO Orders(ProductID, PaymentID, FulfilledByEmployeeID,DateRequired, DateShipped, Status)
 VALUES (1, 2, 2, '2018-09-04', '2018-09-03', 'Shipped');
