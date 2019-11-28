@@ -11,10 +11,15 @@ The ```postgresCommands.sql``` shows all commands used to build this database.
 
 The database contains the following tables:
 🔹Customers
+
 🔹Employees
+
 🔹Orders
+
 🔹Payments
+
 🔹Products
+
 
 The first table, ```Customers``` contains data of customers who placed orders.
 
