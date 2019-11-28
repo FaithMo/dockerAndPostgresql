@@ -10,6 +10,7 @@ The ```postgresCommands.sql``` shows all commands used to build this database.
 ------------------------------------------------------------------------------------------
 
 The database contains the following tables:
+
 🔹Customers
 
     🔸The first table, ```Customers``` contains data of customers who placed orders.
@@ -17,7 +18,9 @@ The database contains the following tables:
     
 🔹Employees
 
-    🔸The ```Employees``` table records all details of employees which this order passes through before it's delivered.
+    🔸The ```Employees``` table records all details of employees which this order passes 
+    
+    through before it's delivered.
     
     
 🔹Payments
@@ -31,7 +34,9 @@ The database contains the following tables:
     
 🔹Orders
 
-    🔸The ```Orders``` table stores the order data recorded on ```Customers, Employees, Payments and Products.``` for a specific customer. 
+    🔸The ```Orders``` table stores the order data recorded on ```Customers, Employees, 
+    
+    Payments and Products.``` for a specific customer. 
     
     🔸```ProductID``` references the ```ProductID``` in the ```Products``` table.
     
