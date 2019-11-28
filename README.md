@@ -20,7 +20,7 @@ The database contains the following tables:
 
 🔹Products
 
-
+------------------------------------------------------------------------------------------
 The first table, ```Customers``` contains data of customers who placed orders.
 
 The ```Employees``` table records all details of employees which this order passes through before it's delivered.
