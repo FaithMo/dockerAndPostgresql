@@ -2,7 +2,7 @@
 CREATE DATABASE Umuzi;
 --creating Customers table
 CREATE TABLE Customers(
-   CustomerID     INTEGER SERIAL PRIMARY KEY,
+   CustomerID     SERIAL PRIMARY KEY,
    FirstName      VARCHAR (50),
    LastName       VARCHAR (50),
    Gender         VARCHAR,
@@ -90,7 +90,7 @@ VALUES ('Sports Car', 'Turnable front wheels, steering function', 700.60);
 --Creating table Orders.
 CREATE TABLE Orders(
    OrdersID                SERIAL       PRIMARY KEY,
-   ProductID               int,         references Payments(ProductID),
+   ProductID               int          references Peoducts(ProductID),
    PaymentID               int          references Payments(PaymentID),
    FulfilledByEmployeeID   int          references Employees(EmployeeID),
    DateRequired            DATE,
