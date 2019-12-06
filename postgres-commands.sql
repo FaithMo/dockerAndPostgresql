@@ -90,7 +90,7 @@ VALUES ('Sports Car', 'Turnable front wheels, steering function', 700.60);
 --Creating table Orders.
 CREATE TABLE Orders(
    OrdersID                SERIAL       PRIMARY KEY,
-   ProductID               int          references Peoducts(ProductID),
+   ProductID               int          references Products(ProductID),
    PaymentID               int          references Payments(PaymentID),
    FulfilledByEmployeeID   int          references Employees(EmployeeID),
    DateRequired            DATE,
